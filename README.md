@@ -1,6 +1,6 @@
-# ODEV - Plugin Template
+# ODEV - Rolling Release
 
-Plugins description.
+A simple way to search rr tickets with more info.
 
 ## Installation
 
@@ -10,5 +10,5 @@ need odev version 4.0.0 or above.
 Enable this plugin by running:
 
 ```bash
-odev plugin --enable odoo-odev/odev-plugin-template
+odev plugin --enable vmac-odoo/odev-rolling-release
 ```
