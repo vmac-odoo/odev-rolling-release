@@ -1,7 +1,7 @@
 from typing import Optional
 
-from odev.plugins.odev_rolling_release.dtos.Subscription import Subscription
-from odev.plugins.odev_rolling_release.dtos.UpgradeRequest import UpgradeRequest
+from odev.plugins.odev_rolling_release.api.dtos.Subscription import Subscription
+from odev.plugins.odev_rolling_release.api.dtos.UpgradeRequest import UpgradeRequest
 from odev.plugins.odev_rolling_release.utils.utils import BoolStr
 
 
