@@ -100,7 +100,7 @@ class RollingRelease(Command):
                 self.rolling.show_not_found,
                 "Do you want ghosts?",
             ),
-            (self.args.lucky, self.rolling_strategy.only_luck, "You feel so lucky?"),
+            (self.args.lucky, self.rolling.only_luck, "You feel so lucky?"),
             (
                 self.args.explicit_contract,
                 self.rolling.with_show_sub,
