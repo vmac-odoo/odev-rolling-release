@@ -22,6 +22,7 @@ class Strategy:
     show_sub: bool = False
     hide_not_found: bool = True
     lucky: bool = False
+    order_by_validity = False
 
     def __init__(
         self,
@@ -60,6 +61,10 @@ class Strategy:
 
     def only_luck(self) -> Self:
         self.lucky = True
+        return self
+
+    def with_order_by_validity(self) -> Self:
+        self.order_by_validity = True
         return self
 
     @abstractmethod

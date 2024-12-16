@@ -85,6 +85,12 @@ class RollingRelease(Command):
         description="[EXPERIMENTAL] Upgrade data.",
     )
 
+    action_order_by_validity = args.Flag(
+        name="order_validity",
+        aliases=["-ov", "--order-by-validity"],
+        description="[EXPERIMENTAL] Upgrade data.",
+    )
+
     def _set_strategy(self) -> Strategy:
         if self.args.bs4:
             logger.info("[EXPERIMENTAL] This strategy could give you a different result vs standard one.")
@@ -105,6 +111,11 @@ class RollingRelease(Command):
                 self.args.explicit_contract,
                 self.rolling.with_show_sub,
                 "I will show u all...",
+            ),
+            (
+                self.args.order_validity,
+                self.rolling.with_order_by_validity,
+                "Will order by expiration date [Note: this data is not very accurate...]",
             ),
         ]
 
