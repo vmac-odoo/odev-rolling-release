@@ -114,6 +114,7 @@ class TitleStrategy(Strategy):
             TableHeader("Version"),
             TableHeader("Sub"),
             TableHeader("Parent"),
+            TableHeader("Exp Date"),
             TableHeader(
                 "Link",
                 min_width=max(len(row[-1]) for row in rows) if len(rows) else 0,
@@ -141,6 +142,7 @@ class TitleStrategy(Strategy):
                     "db_name",
                     "db_uuid",
                     "parent_id",
+                    "date_valid",
                 ]
             )
             .with_domain(self._get_databases_domain(tasks))
@@ -164,9 +166,21 @@ class TitleStrategy(Strategy):
 
         tasks_merged: List[Task] = self._merge_records(tasks, databases, subscriptions, upgrade_requests)
 
+        if self.order_by_validity:
+            tasks_merged = self._get_ordered_tasks(tasks_merged)
+
         rows: List[dict] = self._transform_to_rows(tasks_merged)
 
         return self._display_task_list(rows)
+
+    def _get_ordered_tasks(self, tasks: List[Task]) -> List[Task]:
+        tasks = sorted(
+            tasks,
+            key=lambda task: task.database.date_valid.timestamp()
+            if task.database and task.database.date_valid
+            else None,
+        )
+        return tasks
 
     def _clean_stats(self, datalist: List[dict], union_wrapper: Callable | None):
         return datalist if not callable(union_wrapper) else union_wrapper(datalist)

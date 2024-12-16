@@ -58,7 +58,7 @@ class Service(Generic[T]):
         # This could be override to allow add more custom data
         return response
 
-    def fetch(self) -> List[T]:
+    def fetch(self, **kwargs) -> List[T]:
         if not self.model_name:
             raise ValueError("No model defined on Service")
 
@@ -67,9 +67,7 @@ class Service(Generic[T]):
 
         response: List[dict] = self.clean_for_model(
             self._get_model(self.model_name).search_read(
-                domain=self.domain,
-                fields=self.fields,
-                limit=self.limit,
+                domain=self.domain, fields=self.fields, limit=self.limit, **kwargs
             )
         )
         return [self.model_class(**self._add_response(row)) for row in response]

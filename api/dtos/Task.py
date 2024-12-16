@@ -48,8 +48,9 @@ class Task:
             self.database.version,
             str(self.database.subscription.get_sub_value(self.show_sub)),
             str(self.database.parent_id),
+            self.database.get_date_valid(),
             self.task_link(odoo_url),
         ]
         if self.upgrade_mode:
-            rows.insert(4, str(self.database.upgrade_request.has_traceback))
+            rows.insert(5, str(self.database.upgrade_request.has_traceback))
         return rows
