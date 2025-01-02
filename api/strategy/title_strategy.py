@@ -86,17 +86,14 @@ class TitleStrategy(Strategy):
     ) -> List[Task]:
         transformed_tasks = list_to_dict(tasks, lambda task: task.display_name)
         transformed_databases = list_to_dict(databases, lambda database: database.db_name)
-
-        if self.show_sub:
-            transformed_subs = list_to_dict(subs, lambda sub: sub.id)
+        transformed_subs = list_to_dict(subs, lambda sub: sub.id)
         if self.upgrade_rpc and upgrade_request:
             transformed_upgrade_request = list_to_dict(upgrade_request, lambda request: request.db_uuid)
         new_tasks: List[Task] = []
         for key, task in transformed_tasks.items():
             if transformed_databases.get(key) or not self.hide_not_found:
                 task.database = transformed_databases.get(key, Database())
-                if self.show_sub:
-                    task.database.subscription = transformed_subs.get(task.database.subscription_id, Subscription())
+                task.database.subscription = transformed_subs.get(task.database.subscription_id, Subscription())
                 if self.upgrade_rpc and upgrade_request:
                     task.database.upgrade_request = transformed_upgrade_request.get(
                         task.database.db_uuid, UpgradeRequest()
@@ -126,6 +123,8 @@ class TitleStrategy(Strategy):
         return [titles, rows]
 
     def search(self) -> List[List[TableHeader] | List[dict]]:
+        if self.show_sub:
+            self.task_service.with_sub()
         tasks: List[Task] = (
             self.task_service.with_fields(self._task_fields())
             .with_domain(self._get_tasks_domain())

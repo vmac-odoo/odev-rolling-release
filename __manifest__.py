@@ -22,7 +22,7 @@
 # or merged change.
 # ------------------------------------------------------------------------------
 
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 
 # --- Dependencies -------------------------------------------------------------
 # List other odev plugins from which this current plugin depends.
