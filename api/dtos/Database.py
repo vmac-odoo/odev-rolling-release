@@ -26,7 +26,7 @@ class Database:
         parent_id: bool = False,
         subscription_id: Optional[int] = None,
         date_valid: Optional[str] = "",
-        **kwargs
+        **kwargs,
     ):
         self.id = id
         self.version = version
@@ -38,3 +38,6 @@ class Database:
 
     def get_date_valid(self) -> str:
         return self.date_valid.strftime("%d-%m-%Y")
+
+    def __repr__(self) -> str:
+        return f"DatabaseDTO({self.id}, {self.db_name})"

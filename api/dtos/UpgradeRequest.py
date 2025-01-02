@@ -18,3 +18,6 @@ class UpgradeRequest:
     @property
     def has_traceback(self) -> BoolStr:
         return BoolStr(self.last_traceback)
+
+    def __repr__(self) -> str:
+        return f"UpgradeRequestDTO({self.id}, {self.db_uuid})"

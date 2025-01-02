@@ -54,3 +54,6 @@ class Task:
         if self.upgrade_mode:
             rows.insert(5, str(self.database.upgrade_request.has_traceback))
         return rows
+
+    def __repr__(self) -> str:
+        return f"TaskDTO({self.id}, {self.name})"

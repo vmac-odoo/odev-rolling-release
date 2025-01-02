@@ -14,3 +14,6 @@ class Subscription:
     def get_sub_value(self, show_sub: bool = False) -> str:
         self.client_order_ref.value_if_true = show_sub
         return str(self.client_order_ref)
+
+    def __repr__(self) -> str:
+        return f"SubscriptionDTO({self.id}, {self.get_sub_value(True)})"
