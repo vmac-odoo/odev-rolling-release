@@ -52,7 +52,7 @@ class Task:
             self.task_link(odoo_url),
         ]
         if self.upgrade_mode:
-            rows.insert(5, str(self.database.upgrade_request.has_traceback))
+            rows.insert(4, str(self.database.upgrade_request.has_traceback))
         return rows
 
     def __repr__(self) -> str:

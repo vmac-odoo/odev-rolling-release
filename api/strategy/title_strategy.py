@@ -125,6 +125,8 @@ class TitleStrategy(Strategy):
     def search(self) -> List[List[TableHeader] | List[dict]]:
         if self.show_sub:
             self.task_service.with_sub()
+        if self.upgrade_rpc:
+            self.task_service.with_upgrade_mode()
         tasks: List[Task] = (
             self.task_service.with_fields(self._task_fields())
             .with_domain(self._get_tasks_domain())
