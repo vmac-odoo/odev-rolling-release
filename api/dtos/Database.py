@@ -37,7 +37,7 @@ class Database:
         self.date_valid = datetime.strptime(date_valid, "%Y-%m-%d %H:%M:%S") if date_valid else None
 
     def get_date_valid(self) -> str:
-        return self.date_valid.strftime("%d-%m-%Y")
+        return self.date_valid.strftime("%d-%m-%Y") if self.date_valid else ""
 
     def __repr__(self) -> str:
         return f"DatabaseDTO({self.id}, {self.db_name})"

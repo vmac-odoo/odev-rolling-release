@@ -178,8 +178,8 @@ class TitleStrategy(Strategy):
         tasks = sorted(
             tasks,
             key=lambda task: task.database.date_valid.timestamp()
-            if task.database and task.database.date_valid
-            else None,
+            if task.database and task.database.date_valid and isinstance(task.database.date_valid, datetime)
+            else float("-inf"),
         )
         return tasks
 
